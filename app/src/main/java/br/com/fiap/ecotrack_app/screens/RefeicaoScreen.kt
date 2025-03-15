@@ -3,7 +3,6 @@ package br.com.fiap.ecotrack_app.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -92,13 +91,13 @@ fun RefeicaoScreen(navController: NavController) {
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(16.dp)
-                .verticalScroll(rememberScrollState()) // Scroll adicionado aqui
+                .verticalScroll(rememberScrollState())
         ) {
             if (databaseInitialized) {
                 val refeicoes by viewModel.allRefeicoes.collectAsState(initial = emptyList())
                 val rankingComidas by viewModel.rankingComidas.collectAsState(initial = emptyList())
 
-                // Lista de Refeições
+                // MEALS LIST
                 refeicoes.forEach { refeicao ->
                     Card(modifier = Modifier.padding(8.dp).fillMaxWidth()) {
                         Column {

@@ -36,7 +36,7 @@ fun ApiScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background) // Utiliza a cor de fundo do tema
+            .background(MaterialTheme.colorScheme.background)
             .padding(16.dp)
     ) {
         Spacer(modifier = Modifier.height(16.dp))
@@ -45,9 +45,9 @@ fun ApiScreen(navController: NavController) {
                 text = stringResource(id = R.string.food_query),
                 fontSize = 70.sp,
                 fontWeight = FontWeight.Light,
-                color = MaterialTheme.colorScheme.onBackground, // Utiliza a cor do texto do tema
+                color = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                fontFamily = FontFamily(Font(R.font.stickcream))
+                fontFamily = FontFamily(Font(R.font.montserrat))
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -104,8 +104,8 @@ fun CardAlimento(alimento: Alimento) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp), // Adiciona padding ao card
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp) // Adiciona elevação ao card
+            .padding(8.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(text = stringResource(id = R.string.food_description_label, alimento.descricao), fontWeight = FontWeight.SemiBold)

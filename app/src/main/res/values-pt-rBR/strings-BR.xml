@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ecotrack_app</string>
+    <string name="app_name">Ecotrack</string>
     <string name="email">E-mail</string>
     <string name="password">Senha</string>
     <string name="enter">Entrar</string>
