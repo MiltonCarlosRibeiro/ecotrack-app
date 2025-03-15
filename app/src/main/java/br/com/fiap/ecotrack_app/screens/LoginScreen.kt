@@ -106,7 +106,10 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
                         IconButton(onClick = {
                             passwordVisible = !passwordVisible
                         }) {
-                            Icon(imageVector = image, contentDescription = "Mostrar/ocultar senha")
+                            Icon(
+                                imageVector = image,
+                                contentDescription = stringResource(id = R.string.password_visibility_toggle)
+                            )
                         }
                     }
                 )
@@ -146,7 +149,7 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "Skip Login",
+                        text = stringResource(id = R.string.skip_login),
                         modifier = Modifier
                             .padding(8.dp)
                             .fillMaxWidth(),

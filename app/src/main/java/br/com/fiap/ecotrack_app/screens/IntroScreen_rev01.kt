@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -44,12 +45,12 @@ fun IntroScreen_rev01(navController: NavController) {
     Scaffold(
         topBar = {
             androidx.compose.material3.TopAppBar(
-                title = { Text("EcoTrack") },
+                title = { Text(stringResource(id = R.string.app_name)) },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigate(MainActivity.Routes.LOGIN_SCREEN) }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "Voltar",
+                            contentDescription = stringResource(id = R.string.back),
                             modifier = Modifier.size(24.dp)
                         )
                     }
@@ -84,7 +85,7 @@ fun Exercicio2() {
                     .padding(8.dp)
             )
             Text(
-                text = "Seja bem vindo ao ecotrack!",
+                text = stringResource(id = R.string.welcome_message),
                 modifier = Modifier
                     .weight(1f)
                     .align(Alignment.CenterVertically)
@@ -111,7 +112,7 @@ fun Exercicio22() {
                     .padding(8.dp)
             )
             Text(
-                text = "Você sabia que a combinação de atividade física regular com uma dieta equilibrada é a chave para uma perda de peso saudável e sustentável? Comece a se mexer e veja os resultados! \uD83C\uDFCB\uFE0F\u200D♀\uFE0F",
+                text = stringResource(id = R.string.physical_activity_tip),
                 modifier = Modifier
                     .weight(1f)
                     .align(Alignment.CenterVertically)
@@ -135,24 +136,24 @@ fun Exercicio7() {
                     .padding(8.dp)
             )
             Column(modifier = Modifier.fillMaxWidth().padding(8.dp).weight(1f)) {
-                Text("Você sabia?")
+                Text(stringResource(id = R.string.did_you_know))
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    "Beber água regularmente melhora a pele, a digestão e o humor? Mantenha-se hidratado(a) e sinta a diferença \uD83D\uDCA7",
+                    Text(stringResource(id = R.string.hydration_tip)),
                     modifier = Modifier.align(Alignment.End).padding(10.dp),
                     letterSpacing = 1.sp,
                     lineHeight = 24.sp
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    "Dormir bem (7-9 horas por noite) fortalece o sistema imunológico, melhora a concentração e te deixa mais feliz? \uD83D\uDE34 Priorize o seu descanso!",
+                    Text(stringResource(id = R.string.sleep_tip)),
                     modifier = Modifier.align(Alignment.End).padding(10.dp),
                     letterSpacing = 1.sp,
                     lineHeight = 24.sp
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    "Uma alimentação rica em frutas e vegetais fortalece o corpo e a mente? \uD83C\uDF4E\uD83E\uDD55 Invista em uma dieta equilibrada!",
+                    Text(stringResource(id = R.string.healthy_diet_tip)),
                     modifier = Modifier.align(Alignment.End).padding(10.dp),
                     letterSpacing = 1.sp,
                     lineHeight = 24.sp
@@ -179,7 +180,7 @@ fun Exercicio8() {
                     .background(Color.White.copy(alpha = 0.6f))
             ) {
                 Text(
-                    "Cuide-se!",
+                    Text(stringResource(id = R.string.take_care)),
                     modifier = Modifier.align(Alignment.Center),
                     fontSize = 20.sp,
                     color = Color.Black
@@ -201,16 +202,16 @@ fun Exercicio10(navController: NavController) {
             )
             Spacer(modifier = Modifier.height(10.dp))
             Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
-                Text("Controle suas Refeições")
-                Text("Pesquise Calorias")
+                Text(stringResource(id = R.string.meal_control))
+                Text(stringResource(id = R.string.calorie_search))
             }
             Spacer(modifier = Modifier.height(10.dp))
             Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
                 Button(onClick = { navController.navigate(route = MainActivity.Routes.REFEICAO_SCREEN) }) {
-                    Text("Minhas Refeições")
+                    Text(stringResource(id = R.string.my_meals))
                 }
                 Button(onClick = { navController.navigate(route = MainActivity.Routes.API_SCREEN) }) {
-                    Text("Pesquisar")
+                    Text(stringResource(id = R.string.search))
                 }
             }
         }

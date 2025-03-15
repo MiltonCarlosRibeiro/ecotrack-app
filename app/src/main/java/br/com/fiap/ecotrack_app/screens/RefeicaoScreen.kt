@@ -37,11 +37,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import br.com.fiap.ecotrack_app.MainActivity
+import br.com.fiap.ecotrack_app.R
 import br.com.fiap.ecotrack_app.viewmodel.RefeicaoViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -57,12 +59,12 @@ fun RefeicaoScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Refeições") },
+                title = { Text(stringResource(id = R.string.meals)) },
                 actions = {
                     IconButton(onClick = { navController.navigate(MainActivity.Routes.INTRO_SCREEN_REV01) }) {
                         Icon(
                             Icons.Filled.Home,
-                            contentDescription = "Início",
+                            contentDescription = stringResource(id = R.string.home),
                             modifier = Modifier.size(50.dp)
                         )
                     }
@@ -80,7 +82,7 @@ fun RefeicaoScreen(navController: NavController) {
                     containerColor = MaterialTheme.colorScheme.primary,
                     contentColor = MaterialTheme.colorScheme.onPrimary
                 ) {
-                    Icon(imageVector = Icons.Default.Add, contentDescription = "Adicionar Refeição")
+                    Icon(imageVector = Icons.Default.Add, contentDescription = stringResource(id = R.string.add_meal))
                 }
             }
         },
@@ -102,14 +104,15 @@ fun RefeicaoScreen(navController: NavController) {
                         Column {
                             Card(modifier = Modifier.padding(8.dp).fillMaxWidth()) {
                                 Text(
-                                    text = "Tipo: ${refeicao.tipo}",
+                                    text = stringResource(id = R.string.meal_type, refeicao.tipo),
                                     modifier = Modifier.padding(16.dp),
                                     fontWeight = FontWeight.SemiBold
                                 )
+
                             }
                             Card(modifier = Modifier.padding(8.dp).fillMaxWidth()) {
                                 Text(
-                                    text = "Comida: ${refeicao.comida}",
+                                    text = stringResource(id = R.string.meal_food, refeicao.comida),
                                     modifier = Modifier.padding(16.dp),
                                     fontWeight = FontWeight.SemiBold
                                 )
@@ -118,7 +121,7 @@ fun RefeicaoScreen(navController: NavController) {
                                 val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                                 val dataFormatada = sdf.format(Date(refeicao.data))
                                 Text(
-                                    text = "Data: $dataFormatada",
+                                    text = stringResource(id = R.string.meal_date, dataFormatada),
                                     modifier = Modifier.padding(16.dp),
                                     fontWeight = FontWeight.SemiBold
                                 )
@@ -133,14 +136,14 @@ fun RefeicaoScreen(navController: NavController) {
                 rankingComidas.forEachIndexed { index, ranking ->
                     Card(modifier = Modifier.padding(8.dp).fillMaxWidth()) {
                         Text(
-                            text = "${index + 1}º: ${ranking.comida}",
+                            text = stringResource(id = R.string.meal_ranking, index + 1, ranking.comida),
                             modifier = Modifier.padding(16.dp),
                             fontWeight = FontWeight.SemiBold
                         )
                     }
                 }
             } else {
-                Text("Carregando...", modifier = Modifier.padding(16.dp))
+                Text(stringResource(id = R.string.loading), modifier = Modifier.padding(16.dp))
             }
         }
 
@@ -168,26 +171,27 @@ fun AddRefeicaoDialog(onDismiss: () -> Unit, onConfirm: (String, String, Long) -
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Adicionar Refeição") },
+        title = { Text(stringResource(id = R.string.add_meal)) },
         text = {
             Column {
                 TextField(
                     value = tipo,
                     onValueChange = { tipo = it },
-                    label = { Text("Tipo") },
+                    label = { Text(stringResource(id = R.string.meal_type_label)) },
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 TextField(
                     value = comida,
                     onValueChange = { comida = it },
-                    label = { Text("Comida") },
+                    label = { Text(stringResource(id = R.string.meal_food_label)) },
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Button(onClick = { showDatePicker = true }) {
-                    Text("Selecionar Data")
+                    Text(stringResource(id = R.string.select_date))
                 }
+
             }
         },
         confirmButton = {
@@ -197,7 +201,7 @@ fun AddRefeicaoDialog(onDismiss: () -> Unit, onConfirm: (String, String, Long) -
                 },
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
             ) {
-                Text("Adicionar")
+                Text(stringResource(id = R.string.add))
             }
         },
         dismissButton = {
@@ -205,7 +209,7 @@ fun AddRefeicaoDialog(onDismiss: () -> Unit, onConfirm: (String, String, Long) -
                 onClick = onDismiss,
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.secondary)
             ) {
-                Text("Cancelar")
+                Text(stringResource(id = R.string.cancel))
             }
         },
         containerColor = MaterialTheme.colorScheme.surfaceVariant,

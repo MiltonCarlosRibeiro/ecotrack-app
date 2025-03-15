@@ -12,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -41,7 +42,7 @@ fun ApiScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
         Column {
             Text(
-                text = "Consulta de Alimentos",
+                text = stringResource(id = R.string.food_query),
                 fontSize = 70.sp,
                 fontWeight = FontWeight.Light,
                 color = MaterialTheme.colorScheme.onBackground, // Utiliza a cor do texto do tema
@@ -54,7 +55,7 @@ fun ApiScreen(navController: NavController) {
             OutlinedTextField(
                 value = descricaoState,
                 onValueChange = { descricaoState = it },
-                label = { Text("Descrição do Alimento") },
+                label = { Text(stringResource(id = R.string.food_description)) },
                 modifier = Modifier.fillMaxWidth(),
                 trailingIcon = {
                     IconButton(onClick = {
@@ -69,7 +70,7 @@ fun ApiScreen(navController: NavController) {
                             }
                         })
                     }) {
-                        Icon(imageVector = Icons.Default.Search, contentDescription = "Buscar")
+                        Icon(imageVector = Icons.Default.Search, contentDescription = stringResource(id = R.string.search))
                     }
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
@@ -89,10 +90,10 @@ fun ApiScreen(navController: NavController) {
                 onClick = {
                     navController.navigate(route = "IntroScreen_rev01")
                 },
-                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary), // Utiliza a cor primária do tema
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
-                Text(text = "BACK", fontSize = 20.sp, color = MaterialTheme.colorScheme.onPrimary) // Utiliza a cor do texto no botão do tema
+                Text(text = stringResource(id = R.string.back), fontSize = 20.sp, color = MaterialTheme.colorScheme.onPrimary)
             }
         }
     }
@@ -107,11 +108,11 @@ fun CardAlimento(alimento: Alimento) {
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp) // Adiciona elevação ao card
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = "Descrição: ${alimento.descricao}", fontWeight = FontWeight.SemiBold)
+            Text(text = stringResource(id = R.string.food_description_label, alimento.descricao), fontWeight = FontWeight.SemiBold)
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = "Quantidade: ${alimento.quantidade}")
+            Text(text = stringResource(id = R.string.food_quantity, alimento.quantidade))
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = "Calorias: ${alimento.calorias}")
+            Text(text = stringResource(id = R.string.food_calories, alimento.calorias))
         }
     }
 }
