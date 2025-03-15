@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -49,7 +50,7 @@ fun IntroScreen_rev01(navController: NavController) {
                 navigationIcon = {
                     IconButton(onClick = { navController.navigate(MainActivity.Routes.LOGIN_SCREEN) }) {
                         Icon(
-                            imageVector = Icons.Filled.ArrowBack,
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = stringResource(id = R.string.back),
                             modifier = Modifier.size(24.dp)
                         )
@@ -135,26 +136,35 @@ fun Exercicio7() {
                     .size(80.dp)
                     .padding(8.dp)
             )
-            Column(modifier = Modifier.fillMaxWidth().padding(8.dp).weight(1f)) {
+            Column(modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+                .weight(1f)) {
                 Text(stringResource(id = R.string.did_you_know))
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    Text(stringResource(id = R.string.hydration_tip)),
-                    modifier = Modifier.align(Alignment.End).padding(10.dp),
+                    text = stringResource(id = R.string.hydration_tip),
+                    modifier = Modifier
+                        .align(Alignment.End)
+                        .padding(10.dp),
                     letterSpacing = 1.sp,
                     lineHeight = 24.sp
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    Text(stringResource(id = R.string.sleep_tip)),
-                    modifier = Modifier.align(Alignment.End).padding(10.dp),
+                    text = stringResource(id = R.string.sleep_tip),
+                    modifier = Modifier
+                        .align(Alignment.End)
+                        .padding(10.dp),
                     letterSpacing = 1.sp,
                     lineHeight = 24.sp
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    Text(stringResource(id = R.string.healthy_diet_tip)),
-                    modifier = Modifier.align(Alignment.End).padding(10.dp),
+                    text = stringResource(id = R.string.healthy_diet_tip),
+                    modifier = Modifier
+                        .align(Alignment.End)
+                        .padding(10.dp),
                     letterSpacing = 1.sp,
                     lineHeight = 24.sp
                 )
@@ -180,7 +190,7 @@ fun Exercicio8() {
                     .background(Color.White.copy(alpha = 0.6f))
             ) {
                 Text(
-                    Text(stringResource(id = R.string.take_care)),
+                    text = stringResource(id = R.string.take_care),
                     modifier = Modifier.align(Alignment.Center),
                     fontSize = 20.sp,
                     color = Color.Black
@@ -197,16 +207,24 @@ fun Exercicio10(navController: NavController) {
             Image(
                 painter = painterResource(id = R.drawable.alimento),
                 contentDescription = null,
-                modifier = Modifier.fillMaxWidth().height(200.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
                 contentScale = ContentScale.Crop
             )
             Spacer(modifier = Modifier.height(10.dp))
-            Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 Text(stringResource(id = R.string.meal_control))
                 Text(stringResource(id = R.string.calorie_search))
             }
             Spacer(modifier = Modifier.height(10.dp))
-            Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 Button(onClick = { navController.navigate(route = MainActivity.Routes.REFEICAO_SCREEN) }) {
                     Text(stringResource(id = R.string.my_meals))
                 }
