@@ -7,5 +7,5 @@
     <string name="login">Login</string>
     <string name="subtitle">Please enter your data to login</string>
     <string name="email_required_error">* O email é obrigatório</string>
-    <string name="password_required_error">* A senha é obrigatória</string>
+    <string name="password_required_error">Password is mandatory</string>
 </resources>
