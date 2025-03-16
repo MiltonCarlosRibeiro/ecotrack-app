@@ -11,7 +11,7 @@
     <string name="password_visibility_toggle">Toggle password visibility</string>
 
     <!-- Food Query -->
-    <string name="food_query">Food Query</string>
+    <string name="food_query">Check Food Calories</string>
     <string name="food_description">Food Description</string>
     <string name="search">Search</string>
     <string name="back">Back</string>

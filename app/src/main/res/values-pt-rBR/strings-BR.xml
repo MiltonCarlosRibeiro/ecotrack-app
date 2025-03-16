@@ -11,7 +11,7 @@
     <string name="password_visibility_toggle">Alternar visibilidade da senha</string>
 
     <!-- Consulta de Alimentos -->
-    <string name="food_query">Consulta de Alimentos</string>
+    <string name="food_query">Verificar Calorias</string>
     <string name="food_description">Descrição do Alimento</string>
     <string name="search">Buscar</string>
     <string name="back">Voltar</string>
