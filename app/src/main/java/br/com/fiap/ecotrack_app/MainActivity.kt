@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
             Ecotrack_appTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = Color(0xFFBBDEFB)
+                    color = Color(0xFF5783AF)
                 ) {
                     val navController = rememberNavController()
                     val isLoggedIn = sharedPreferences.getBoolean(isLoggedInKey, false)

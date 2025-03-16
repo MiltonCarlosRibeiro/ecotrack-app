@@ -32,16 +32,8 @@ import br.com.fiap.ecotrack_app.ui.theme.Ecotrack_appTheme
 fun IntroScreen_rev01(navController: NavController) {
     Scaffold(
         topBar = {
-            androidx.compose.material3.TopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(id = R.string.app_name),
-                        fontFamily = FontFamily(Font(R.font.montserrat)),
-                        fontWeight = FontWeight.ExtraBold,
-                        fontSize = 22.sp,
-                        color = Color.Black
-                    )
-                },
+            TopAppBar(
+                title = {  },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigate(MainActivity.Routes.LOGIN_SCREEN) }) {
                         Icon(
@@ -56,6 +48,7 @@ fun IntroScreen_rev01(navController: NavController) {
                 )
             )
         }
+
     ) { paddingValues ->
         val scrollState = rememberScrollState()
         Column(
@@ -81,7 +74,7 @@ fun Exercicio2() {
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth(),
-        shape = MaterialTheme.shapes.medium // 🔹 Rounded corners like LoginScreen
+        shape = MaterialTheme.shapes.medium
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Image(
@@ -99,9 +92,9 @@ fun Exercicio2() {
                     .padding(16.dp),
                 letterSpacing = 1.sp,
                 lineHeight = 24.sp,
-                fontSize = 28.sp, // 🔹 Adjusted font size
+                fontSize = 26.sp,
                 fontWeight = FontWeight.ExtraBold,
-                fontFamily = FontFamily(Font(R.font.montserrat)) // 🔹 Applied Montserrat
+                fontFamily = FontFamily(Font(R.font.roboto))
             )
         }
     }
@@ -122,13 +115,13 @@ fun Exercicio22() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
-                    .weight(1f) // 🔹 Allows text to take remaining space
+                    .weight(1f)
             ) {
                 Text(
                     text = stringResource(id = R.string.did_you_know),
-                    fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                    fontFamily = FontFamily(Font(R.font.roboto)),
                     fontWeight = FontWeight.ExtraBold,
-                    fontSize = 16.sp, // 🔹 Title font size
+                    fontSize = 18.sp,
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -136,9 +129,9 @@ fun Exercicio22() {
                     text = stringResource(id = R.string.physical_activity_tip),
                     letterSpacing = 1.sp,
                     lineHeight = 24.sp,
-                    fontWeight = FontWeight.ExtraBold,
-                    fontSize = 18.sp,
-                    fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp,
+                    fontFamily = FontFamily(Font(R.font.roboto)),
                     modifier = Modifier
                         .align(Alignment.Start)
                         .padding(10.dp)
@@ -167,17 +160,19 @@ fun Exercicio7() {
             ) {
                 Text(
                     text = stringResource(id = R.string.did_you_know),
-                    fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
-                    fontWeight = FontWeight.ExtraBold
+                    fontFamily = FontFamily(Font(R.font.roboto)),
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 18.sp,
+                    color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = stringResource(id = R.string.sleep_tip),
                     letterSpacing = 1.sp,
                     lineHeight = 24.sp,
-                    fontWeight = FontWeight.ExtraBold,
-                    fontSize = 18.sp,
-                    fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp,
+                    fontFamily = FontFamily(Font(R.font.roboto)),
                     modifier = Modifier
                         .align(Alignment.Start)
                         .padding(10.dp)
@@ -207,7 +202,7 @@ fun Exercicio8() {
                     text = stringResource(id = R.string.take_care),
                     modifier = Modifier.align(Alignment.Center),
                     fontSize = 20.sp,
-                    fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                    fontFamily = FontFamily(Font(R.font.roboto)),
                     fontWeight = FontWeight.ExtraBold,
                     color = Color.Black
                 )
@@ -230,12 +225,12 @@ fun Exercicio10(navController: NavController) {
             Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = stringResource(id = R.string.meal_control),
-                    fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                    fontFamily = FontFamily(Font(R.font.roboto)),
                     fontWeight = FontWeight.ExtraBold
                 )
                 Text(
                     text = stringResource(id = R.string.calorie_search),
-                    fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                    fontFamily = FontFamily(Font(R.font.roboto)),
                     fontWeight = FontWeight.ExtraBold
                 )
             }
@@ -244,14 +239,14 @@ fun Exercicio10(navController: NavController) {
                 Button(onClick = { navController.navigate(route = MainActivity.Routes.REFEICAO_SCREEN) }) {
                     Text(
                         text = stringResource(id = R.string.my_meals),
-                        fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                        fontFamily = FontFamily(Font(R.font.roboto)),
                         fontWeight = FontWeight.ExtraBold
                     )
                 }
                 Button(onClick = { navController.navigate(route = MainActivity.Routes.API_SCREEN) }) {
                     Text(
                         text = stringResource(id = R.string.search),
-                        fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                        fontFamily = FontFamily(Font(R.font.roboto)),
                         fontWeight = FontWeight.ExtraBold
                     )
                 }

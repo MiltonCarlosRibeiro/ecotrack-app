@@ -25,7 +25,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -52,9 +51,11 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
     val generalPadding = 35.dp
     val cardPadding = 32.dp
 
+
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color(0xFF5783AF))
             .padding(generalPadding)
 
     )
@@ -63,11 +64,12 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
             text = stringResource(id = R.string.app_name),
             fontSize = 32.sp,
             fontWeight = FontWeight.ExtraBold,
-            fontFamily = FontFamily(Font(R.font.montserrat)),
+            fontFamily = FontFamily(Font(R.font.roboto)),
             color = Color.Black,
             modifier = Modifier
                 .padding(top = 60.dp)
                 .fillMaxWidth(),
+
             textAlign = TextAlign.Center
         )
 
@@ -75,8 +77,8 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
         Text(
             text = stringResource(id = R.string.subtitle),
             fontSize = 18.sp,
-            fontWeight = FontWeight.ExtraBold,
-            fontFamily = FontFamily(Font(R.font.montserrat)),
+            fontWeight = FontWeight.Bold,
+            fontFamily = FontFamily(Font(R.font.roboto)),
             color = Color.Black,
             modifier = Modifier
                 .fillMaxWidth()
@@ -105,7 +107,7 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
                         Text(
                             text = stringResource(id = R.string.email),
                             fontWeight = FontWeight.ExtraBold,
-                            fontFamily = FontFamily(Font(R.font.montserrat))
+                            fontFamily = FontFamily(Font(R.font.roboto))
 
                         )
                     },
@@ -119,7 +121,7 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
                         text = stringResource(id = R.string.email_required_error),
                         modifier = Modifier.fillMaxWidth(),
                         fontSize = 14.sp,
-                        fontFamily = FontFamily(Font(R.font.montserrat)),
+                        fontFamily = FontFamily(Font(R.font.roboto)),
                         color = Color.Red,
                         textAlign = TextAlign.End
                     )
@@ -137,7 +139,7 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
                         Text(
                             text = stringResource(id = R.string.password),
                             fontWeight = FontWeight.ExtraBold,
-                            fontFamily = FontFamily(Font(R.font.montserrat))
+                            fontFamily = FontFamily(Font(R.font.roboto))
 
                         )
                     },
@@ -166,7 +168,7 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
                         text = stringResource(id = R.string.password_required_error),
                         modifier = Modifier.fillMaxWidth(),
                         fontSize = 14.sp,
-                        fontFamily = FontFamily(Font(R.font.montserrat)),
+                        fontFamily = FontFamily(Font(R.font.roboto)),
                         color = Color.Red,
                         textAlign = TextAlign.End
                     )
