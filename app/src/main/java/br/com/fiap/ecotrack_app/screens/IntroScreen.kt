@@ -2,27 +2,12 @@ package br.com.fiap.ecotrack_app.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,11 +18,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import br.com.fiap.ecotrack_app.MainActivity
 import br.com.fiap.ecotrack_app.R
+import br.com.fiap.ecotrack_app.ui.theme.Ecotrack_appTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,16 +33,27 @@ fun IntroScreen_rev01(navController: NavController) {
     Scaffold(
         topBar = {
             androidx.compose.material3.TopAppBar(
-                title = { Text(stringResource(id = R.string.app_name)) },
+                title = {
+                    Text(
+                        text = stringResource(id = R.string.app_name),
+                        fontFamily = FontFamily(Font(R.font.montserrat)),
+                        fontWeight = FontWeight.ExtraBold,
+                        fontSize = 22.sp,
+                        color = Color.Black
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigate(MainActivity.Routes.LOGIN_SCREEN) }) {
                         Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            imageVector = Icons.Filled.ArrowBack,
                             contentDescription = stringResource(id = R.string.back),
                             modifier = Modifier.size(24.dp)
                         )
                     }
-                }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(0xFF5783AF)
+                )
             )
         }
     ) { paddingValues ->
@@ -63,6 +62,9 @@ fun IntroScreen_rev01(navController: NavController) {
             modifier = Modifier
                 .padding(paddingValues)
                 .verticalScroll(scrollState)
+                .background(Color(0xFF5783AF))
+                .fillMaxSize()
+                .padding(16.dp)
         ) {
             Exercicio2()
             Exercicio8()
@@ -75,7 +77,12 @@ fun IntroScreen_rev01(navController: NavController) {
 
 @Composable
 fun Exercicio2() {
-    Card(modifier = Modifier.padding(8.dp)) {
+    Card(
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth(),
+        shape = MaterialTheme.shapes.medium // 🔹 Rounded corners like LoginScreen
+    ) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Image(
                 painter = painterResource(id = R.drawable.checklist),
@@ -92,9 +99,9 @@ fun Exercicio2() {
                     .padding(16.dp),
                 letterSpacing = 1.sp,
                 lineHeight = 24.sp,
-                fontSize = 40.sp,
-                fontWeight = FontWeight.Light,
-                fontFamily = FontFamily(Font(R.font.stickcream))
+                fontSize = 28.sp, // 🔹 Adjusted font size
+                fontWeight = FontWeight.ExtraBold,
+                fontFamily = FontFamily(Font(R.font.montserrat)) // 🔹 Applied Montserrat
             )
         }
     }
@@ -111,15 +118,32 @@ fun Exercicio22() {
                     .size(80.dp)
                     .padding(8.dp)
             )
-            Text(
-                text = stringResource(id = R.string.physical_activity_tip),
+            Column(
                 modifier = Modifier
-                    .weight(1f)
-                    .align(Alignment.CenterVertically)
-                    .padding(16.dp),
-                letterSpacing = 1.sp,
-                lineHeight = 24.sp
-            )
+                    .fillMaxWidth()
+                    .padding(8.dp)
+                    .weight(1f) // 🔹 Allows text to take remaining space
+            ) {
+                Text(
+                    text = stringResource(id = R.string.did_you_know),
+                    fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 16.sp, // 🔹 Title font size
+                    color = Color.Black
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = stringResource(id = R.string.physical_activity_tip),
+                    letterSpacing = 1.sp,
+                    lineHeight = 24.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 18.sp,
+                    fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                    modifier = Modifier
+                        .align(Alignment.Start)
+                        .padding(10.dp)
+                )
+            }
         }
     }
 }
@@ -135,37 +159,28 @@ fun Exercicio7() {
                     .size(80.dp)
                     .padding(8.dp)
             )
-            Column(modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-                .weight(1f)) {
-                Text(stringResource(id = R.string.did_you_know))
-                Spacer(modifier = Modifier.height(8.dp))
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+                    .weight(1f)
+            ) {
                 Text(
-                    text = stringResource(id = R.string.hydration_tip),
-                    modifier = Modifier
-                        .align(Alignment.End)
-                        .padding(10.dp),
-                    letterSpacing = 1.sp,
-                    lineHeight = 24.sp
+                    text = stringResource(id = R.string.did_you_know),
+                    fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                    fontWeight = FontWeight.ExtraBold
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = stringResource(id = R.string.sleep_tip),
-                    modifier = Modifier
-                        .align(Alignment.End)
-                        .padding(10.dp),
                     letterSpacing = 1.sp,
-                    lineHeight = 24.sp
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = stringResource(id = R.string.healthy_diet_tip),
+                    lineHeight = 24.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 18.sp,
+                    fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
                     modifier = Modifier
-                        .align(Alignment.End)
-                        .padding(10.dp),
-                    letterSpacing = 1.sp,
-                    lineHeight = 24.sp
+                        .align(Alignment.Start)
+                        .padding(10.dp)
                 )
             }
         }
@@ -192,6 +207,8 @@ fun Exercicio8() {
                     text = stringResource(id = R.string.take_care),
                     modifier = Modifier.align(Alignment.Center),
                     fontSize = 20.sp,
+                    fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                    fontWeight = FontWeight.ExtraBold,
                     color = Color.Black
                 )
             }
@@ -206,32 +223,49 @@ fun Exercicio10(navController: NavController) {
             Image(
                 painter = painterResource(id = R.drawable.alimento),
                 contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp),
+                modifier = Modifier.fillMaxWidth().height(200.dp),
                 contentScale = ContentScale.Crop
             )
             Spacer(modifier = Modifier.height(10.dp))
-            Row(
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(stringResource(id = R.string.meal_control))
-                Text(stringResource(id = R.string.calorie_search))
+            Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = stringResource(id = R.string.meal_control),
+                    fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                    fontWeight = FontWeight.ExtraBold
+                )
+                Text(
+                    text = stringResource(id = R.string.calorie_search),
+                    fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                    fontWeight = FontWeight.ExtraBold
+                )
             }
             Spacer(modifier = Modifier.height(10.dp))
-            Row(
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier.fillMaxWidth()
-            ) {
+            Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
                 Button(onClick = { navController.navigate(route = MainActivity.Routes.REFEICAO_SCREEN) }) {
-                    Text(stringResource(id = R.string.my_meals))
+                    Text(
+                        text = stringResource(id = R.string.my_meals),
+                        fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                        fontWeight = FontWeight.ExtraBold
+                    )
                 }
                 Button(onClick = { navController.navigate(route = MainActivity.Routes.API_SCREEN) }) {
-                    Text(stringResource(id = R.string.search))
+                    Text(
+                        text = stringResource(id = R.string.search),
+                        fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                        fontWeight = FontWeight.ExtraBold
+                    )
                 }
             }
         }
         Spacer(modifier = Modifier.height(30.dp))
+    }
+}
+
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+private fun IntroScreenPreview() {
+    val fakeNavController = rememberNavController()
+    Ecotrack_appTheme {
+        IntroScreen_rev01(navController = fakeNavController)
     }
 }

@@ -16,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -50,7 +51,7 @@ class MainActivity : ComponentActivity() {
             Ecotrack_appTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = Color(0xFFBBDEFB)
                 ) {
                     val navController = rememberNavController()
                     val isLoggedIn = sharedPreferences.getBoolean(isLoggedInKey, false)

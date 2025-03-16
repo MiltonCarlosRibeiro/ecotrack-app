@@ -61,34 +61,35 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
     {
         Text(
             text = stringResource(id = R.string.app_name),
-            fontSize = 32.sp, // 🔹 Increased font size for better emphasis
-            fontWeight = FontWeight.Bold,
-            fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat font
-            color = Color.White,
+            fontSize = 32.sp,
+            fontWeight = FontWeight.ExtraBold,
+            fontFamily = FontFamily(Font(R.font.montserrat)),
+            color = Color.Black,
             modifier = Modifier
                 .padding(top = 60.dp)
                 .fillMaxWidth(),
-            textAlign = TextAlign.Center // 🔹 Centered text for better layout
+            textAlign = TextAlign.Center
         )
 
         Spacer(modifier = Modifier.height(28.dp))
         Text(
             text = stringResource(id = R.string.subtitle),
-            fontSize = 18.sp, // 🔹 Increased font size for better readability
-            fontWeight = FontWeight.Medium,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.ExtraBold,
             fontFamily = FontFamily(Font(R.font.montserrat)),
+            color = Color.Black,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 24.dp), // 🔹 Added padding for better positioning
-            textAlign = TextAlign.Center // 🔹 Centered text
+                .padding(horizontal = 24.dp),
+            textAlign = TextAlign.Center
         )
 
         Spacer(modifier = Modifier.height(28.dp))
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 24.dp), // 🔹 Added horizontal padding for better layout
-            shape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp) // 🔹 Applied rounded corners
+                .padding(horizontal = 24.dp),
+            shape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp)
         )
         {
             Column(
@@ -103,7 +104,8 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
                     label = {
                         Text(
                             text = stringResource(id = R.string.email),
-                            fontFamily = FontFamily(Font(R.font.montserrat)) // 🔹 Applied Montserrat
+                            fontWeight = FontWeight.ExtraBold,
+                            fontFamily = FontFamily(Font(R.font.montserrat))
 
                         )
                     },
@@ -117,7 +119,7 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
                         text = stringResource(id = R.string.email_required_error),
                         modifier = Modifier.fillMaxWidth(),
                         fontSize = 14.sp,
-                        fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                        fontFamily = FontFamily(Font(R.font.montserrat)),
                         color = Color.Red,
                         textAlign = TextAlign.End
                     )
@@ -132,8 +134,10 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
                     },
                     modifier = Modifier.fillMaxWidth(),
                     label = {
-                        Text(text = stringResource(id = R.string.password),
-                                fontFamily = FontFamily(Font(R.font.montserrat)) // 🔹 Applied Montserrat
+                        Text(
+                            text = stringResource(id = R.string.password),
+                            fontWeight = FontWeight.ExtraBold,
+                            fontFamily = FontFamily(Font(R.font.montserrat))
 
                         )
                     },
@@ -142,7 +146,7 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
                     ),
                     visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                     isError = passwordError,
-                    trailingIcon = { // Adicionado
+                    trailingIcon = {
                         val image = if (passwordVisible)
                             Icons.Filled.Visibility
                         else Icons.Filled.VisibilityOff
@@ -162,7 +166,7 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
                         text = stringResource(id = R.string.password_required_error),
                         modifier = Modifier.fillMaxWidth(),
                         fontSize = 14.sp,
-                        fontFamily = FontFamily(Font(R.font.montserrat)), // 🔹 Applied Montserrat
+                        fontFamily = FontFamily(Font(R.font.montserrat)),
                         color = Color.Red,
                         textAlign = TextAlign.End
                     )
@@ -179,7 +183,7 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
                     modifier = Modifier.fillMaxWidth(),
                     shape = androidx.compose.foundation.shape.RoundedCornerShape(50.dp),
                     colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF5783AF) // 🔹 Applied a custom button color
+                        containerColor = Color(0xFF5783AF)
                     )
 
                 ) {
