@@ -77,6 +77,24 @@ fun IntroScreen_rev01(navController: NavController) {
     }
 }
 
+@Composable
+fun Exercicio8() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.corrida),
+            contentDescription = stringResource(id = R.string.running_image_desc),
+            modifier = Modifier
+                .size(140.dp)
+                .align(Alignment.CenterHorizontally)
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+    }
+}
 
 
 @Composable
@@ -90,6 +108,7 @@ fun Exercicio22() {
                     .size(80.dp)
                     .padding(8.dp)
             )
+            Spacer(modifier = Modifier.height(10.dp))
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -161,34 +180,7 @@ fun Exercicio7() {
     }
 }
 
-@Composable
-fun Exercicio8() {
-    Card(modifier = Modifier.padding(8.dp)) {
-        Box {
-            Image(
-                painter = painterResource(id = R.drawable.gym),
-                contentDescription = null,
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.Center)
-                    .background(Color.White.copy(alpha = 0.6f))
-            ) {
-                Text(
-                    text = stringResource(id = R.string.take_care),
-                    modifier = Modifier.align(Alignment.Center),
-                    fontSize = 20.sp,
-                    fontFamily = FontFamily(Font(R.font.roboto)),
-                    fontWeight = FontWeight.ExtraBold,
-                    color = Color.Black
-                )
-            }
-        }
-    }
-}
+
 
 @Composable
 fun Exercicio10(navController: NavController) {

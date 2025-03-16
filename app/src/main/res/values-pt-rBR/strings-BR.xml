@@ -24,6 +24,8 @@
     <string name="meal_control">Controle suas Refeições</string>
     <string name="calorie_search">Pesquise Calorias</string>
     <string name="my_meals">Minhas Refeições</string>
+    <string name="running_image_desc">Man running</string>
+
 
     <!-- Refeições -->
     <string name="meals">Refeições</string>

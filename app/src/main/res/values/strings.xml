@@ -24,6 +24,7 @@
     <string name="meal_control">Manage Your Meals</string>
     <string name="calorie_search">Search Calories</string>
     <string name="my_meals">My Meals</string>
+    <string name="running_image_desc">Man running</string>
 
     <!-- Meals -->
     <string name="meals">Meals</string>
