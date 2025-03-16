@@ -9,15 +9,21 @@
     <string name="password_required_error">Password is required</string>
     <string name="skip_login">Skip login</string>
     <string name="password_visibility_toggle">Toggle password visibility</string>
+    <string name="salad_image_desc">Salad Bowl</string>
 
-    <!-- Food Query -->
-    <string name="food_query">Check Food Calories</string>
-    <string name="food_description">Food Description</string>
-    <string name="search">Search</string>
-    <string name="back">Back</string>
-    <string name="food_description_label">Description: %1$s</string>
-    <string name="food_quantity">Quantity: %1$s</string>
-    <string name="food_calories">Calories: %1$s</string>
+
+    <!-- Intro -->
+    <string name="welcome_message">Welcome to our app!</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="physical_activity_tip">Did you know that combining regular physical activity with a balanced diet is the key to healthy and sustainable weight loss? Start moving and see the results! 🏋️‍♀️</string>
+    <string name="did_you_know">Did you know?</string>
+    <string name="hydration_tip">Drinking water regularly improves skin, digestion, and mood? Stay hydrated and feel the difference 💧</string>
+    <string name="sleep_tip">Getting good sleep (7-9 hours per night) strengthens your immune system, improves concentration, and makes you happier? 😴 Prioritize your rest!</string>
+    <string name="healthy_diet_tip">A diet rich in fruits and vegetables strengthens both body and mind? 🍎🥕 Invest in a balanced diet!</string>
+    <string name="take_care">Take care!</string>
+    <string name="meal_control">Manage Your Meals</string>
+    <string name="calorie_search">Search Calories</string>
+    <string name="my_meals">My Meals</string>
 
     <!-- Meals -->
     <string name="meals">Meals</string>
@@ -34,15 +40,16 @@
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
 
-    <!-- Intro -->
-    <string name="welcome_message">Welcome to Ecotrack!</string>
-    <string name="physical_activity_tip">Did you know that combining regular physical activity with a balanced diet is the key to healthy and sustainable weight loss? Start moving and see the results! 🏋️‍♀️</string>
-    <string name="did_you_know">Did you know?</string>
-    <string name="hydration_tip">Drinking water regularly improves skin, digestion, and mood? Stay hydrated and feel the difference 💧</string>
-    <string name="sleep_tip">Getting good sleep (7-9 hours per night) strengthens your immune system, improves concentration, and makes you happier? 😴 Prioritize your rest!</string>
-    <string name="healthy_diet_tip">A diet rich in fruits and vegetables strengthens both body and mind? 🍎🥕 Invest in a balanced diet!</string>
-    <string name="take_care">Take care!</string>
-    <string name="meal_control">Manage Your Meals</string>
-    <string name="calorie_search">Search Calories</string>
-    <string name="my_meals">My Meals</string>
+    <!-- Food Query -->
+    <string name="food_query">Check Food Calories</string>
+    <string name="food_description">Food Description</string>
+    <string name="search">Search</string>
+    <string name="back">Back</string>
+    <string name="food_description_label">Description: %1$s</string>
+    <string name="food_quantity">Quantity: %1$s</string>
+    <string name="food_calories">Calories: %1$s</string>
+
+
+
+
 </resources>

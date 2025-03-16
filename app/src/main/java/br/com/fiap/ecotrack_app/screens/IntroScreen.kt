@@ -30,16 +30,26 @@ import br.com.fiap.ecotrack_app.ui.theme.Ecotrack_appTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IntroScreen_rev01(navController: NavController) {
+    val robotoFont = FontFamily(Font(R.font.roboto))
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = {  },
+                title = {
+                    Text(
+                        text = stringResource(id = R.string.dashboard),
+                        fontFamily = robotoFont,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigate(MainActivity.Routes.LOGIN_SCREEN) }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = stringResource(id = R.string.back),
-                            modifier = Modifier.size(24.dp)
+                            modifier = Modifier.size(24.dp),
+                            tint = Color.White
                         )
                     }
                 },
@@ -48,7 +58,6 @@ fun IntroScreen_rev01(navController: NavController) {
                 )
             )
         }
-
     ) { paddingValues ->
         val scrollState = rememberScrollState()
         Column(
@@ -59,7 +68,7 @@ fun IntroScreen_rev01(navController: NavController) {
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            Exercicio2()
+//            Exercicio2()
             Exercicio8()
             Exercicio22()
             Exercicio7()
@@ -68,37 +77,7 @@ fun IntroScreen_rev01(navController: NavController) {
     }
 }
 
-@Composable
-fun Exercicio2() {
-    Card(
-        modifier = Modifier
-            .padding(8.dp)
-            .fillMaxWidth(),
-        shape = MaterialTheme.shapes.medium
-    ) {
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Image(
-                painter = painterResource(id = R.drawable.checklist),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(80.dp)
-                    .padding(8.dp)
-            )
-            Text(
-                text = stringResource(id = R.string.welcome_message),
-                modifier = Modifier
-                    .weight(1f)
-                    .align(Alignment.CenterVertically)
-                    .padding(16.dp),
-                letterSpacing = 1.sp,
-                lineHeight = 24.sp,
-                fontSize = 26.sp,
-                fontWeight = FontWeight.ExtraBold,
-                fontFamily = FontFamily(Font(R.font.roboto))
-            )
-        }
-    }
-}
+
 
 @Composable
 fun Exercicio22() {
