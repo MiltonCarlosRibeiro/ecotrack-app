@@ -182,50 +182,128 @@ fun Exercicio7() {
 
 
 
+//@Composable
+//fun Exercicio10(navController: NavController) {
+//    Card(modifier = Modifier.padding(8.dp)) {
+//        Column {
+//            Image(
+//                painter = painterResource(id = R.drawable.alimento),
+//                contentDescription = null,
+//                modifier = Modifier.fillMaxWidth().height(200.dp),
+//                contentScale = ContentScale.Crop
+//            )
+//            Spacer(modifier = Modifier.height(10.dp))
+//            Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
+//                Text(
+//                    text = stringResource(id = R.string.meal_control),
+//                    fontFamily = FontFamily(Font(R.font.roboto)),
+//                    fontWeight = FontWeight.ExtraBold
+//                )
+//                Text(
+//                    text = stringResource(id = R.string.calorie_search),
+//                    fontFamily = FontFamily(Font(R.font.roboto)),
+//                    fontWeight = FontWeight.ExtraBold
+//                )
+//            }
+//            Spacer(modifier = Modifier.height(10.dp))
+//            Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
+//                Button(onClick = { navController.navigate(route = MainActivity.Routes.REFEICAO_SCREEN) }) {
+//                    Text(
+//                        text = stringResource(id = R.string.my_meals),
+//                        fontFamily = FontFamily(Font(R.font.roboto)),
+//                        fontWeight = FontWeight.ExtraBold
+//                    )
+//                }
+//                Button(onClick = { navController.navigate(route = MainActivity.Routes.API_SCREEN) }) {
+//                    Text(
+//                        text = stringResource(id = R.string.search),
+//                        fontFamily = FontFamily(Font(R.font.roboto)),
+//                        fontWeight = FontWeight.ExtraBold
+//                    )
+//                }
+//            }
+//        }
+//        Spacer(modifier = Modifier.height(30.dp))
+//    }
+//}
+
 @Composable
 fun Exercicio10(navController: NavController) {
     Card(modifier = Modifier.padding(8.dp)) {
-        Column {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.alimento),
                 contentDescription = null,
-                modifier = Modifier.fillMaxWidth().height(200.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
                 contentScale = ContentScale.Crop
             )
+
             Spacer(modifier = Modifier.height(10.dp))
-            Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
+
+            Text(
+                text = stringResource(id = R.string.meal_control),
+                fontFamily = FontFamily(Font(R.font.roboto)),
+                fontWeight = FontWeight.ExtraBold
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                text = stringResource(id = R.string.calorie_search),
+                fontFamily = FontFamily(Font(R.font.roboto)),
+                fontWeight = FontWeight.ExtraBold
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(
+                onClick = { navController.navigate(route = MainActivity.Routes.REFEICAO_SCREEN) },
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 Text(
-                    text = stringResource(id = R.string.meal_control),
-                    fontFamily = FontFamily(Font(R.font.roboto)),
-                    fontWeight = FontWeight.ExtraBold
-                )
-                Text(
-                    text = stringResource(id = R.string.calorie_search),
+                    text = stringResource(id = R.string.my_meals),
                     fontFamily = FontFamily(Font(R.font.roboto)),
                     fontWeight = FontWeight.ExtraBold
                 )
             }
-            Spacer(modifier = Modifier.height(10.dp))
-            Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
-                Button(onClick = { navController.navigate(route = MainActivity.Routes.REFEICAO_SCREEN) }) {
-                    Text(
-                        text = stringResource(id = R.string.my_meals),
-                        fontFamily = FontFamily(Font(R.font.roboto)),
-                        fontWeight = FontWeight.ExtraBold
-                    )
-                }
-                Button(onClick = { navController.navigate(route = MainActivity.Routes.API_SCREEN) }) {
-                    Text(
-                        text = stringResource(id = R.string.search),
-                        fontFamily = FontFamily(Font(R.font.roboto)),
-                        fontWeight = FontWeight.ExtraBold
-                    )
-                }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Button(
+                onClick = { navController.navigate(route = MainActivity.Routes.API_SCREEN) },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = stringResource(id = R.string.search),
+                    fontFamily = FontFamily(Font(R.font.roboto)),
+                    fontWeight = FontWeight.ExtraBold
+                )
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Button(
+                onClick = { navController.navigate(route = MainActivity.Routes.BMI_SCREEN) },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = stringResource(id = R.string.bmi_calculator),
+                    fontFamily = FontFamily(Font(R.font.roboto)),
+                    fontWeight = FontWeight.ExtraBold
+                )
             }
         }
-        Spacer(modifier = Modifier.height(30.dp))
     }
 }
+
+
 
 @Preview(showSystemUi = true, showBackground = true)
 @Composable

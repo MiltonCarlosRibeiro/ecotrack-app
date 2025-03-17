@@ -44,11 +44,30 @@
     <!-- Food Query -->
     <string name="food_query">Check Food Calories</string>
     <string name="food_description">Food Description</string>
-    <string name="search">Search</string>
+    <string name="search">Consult Food Calories</string>
     <string name="back">Back</string>
     <string name="food_description_label">Description: %1$s</string>
     <string name="food_quantity">Quantity: %1$s</string>
     <string name="food_calories">Calories: %1$s</string>
+
+    <!-- BMI Screen -->
+
+    <string name="bmi_calculator">BMI Calculator</string>
+    <string name="enter_details">Enter your details</string>
+    <string name="weight_placeholder">Enter your weight (kg)</string>
+    <string name="height_placeholder">Enter your height (cm)</string>
+    <string name="calculate_bmi">Calculate BMI</string>
+    <string name="bmi_result">Your BMI: %.2f</string>
+    <string name="weighing_image_desc">Weighing Machine</string>
+
+
+    <!-- BMI Status -->
+    <string name="underweight">Underweight</string>
+    <string name="ideal_weight">Ideal Weight</string>
+    <string name="slightly_overweight">Slightly Overweight</string>
+    <string name="obesity_grade_1">Obesity Grade I</string>
+    <string name="obesity_grade_2">Obesity Grade II</string>
+    <string name="obesity_grade_3">Obesity Grade III</string>
 
 
 

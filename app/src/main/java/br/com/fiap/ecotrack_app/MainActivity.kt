@@ -22,6 +22,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.ecotrack_app.model.Usuario
 import br.com.fiap.ecotrack_app.screens.ApiScreen
+import br.com.fiap.ecotrack_app.screens.BmiScreen
 import br.com.fiap.ecotrack_app.screens.IntroScreen_rev01
 import br.com.fiap.ecotrack_app.screens.LoginScreen
 import br.com.fiap.ecotrack_app.screens.RefeicaoScreen
@@ -40,6 +41,7 @@ class MainActivity : ComponentActivity() {
         const val INTRO_SCREEN_REV01 = "IntroScreen_rev01"
         const val API_SCREEN = "ApiScreen"
         const val REFEICAO_SCREEN = "RefeicaoScreen"
+        const val BMI_SCREEN = "BmiScreen"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,6 +121,12 @@ class MainActivity : ComponentActivity() {
                         composable(Routes.REFEICAO_SCREEN) {
                           RefeicaoScreen(navController)
                         }
+
+                        composable(Routes.BMI_SCREEN) {
+                            BmiScreen(navController)
+                        }
+
+
                     }
                 }
             }

@@ -45,11 +45,30 @@
     <!-- Consulta de Alimentos -->
     <string name="food_query">Verificar Calorias</string>
     <string name="food_description">Descrição do Alimento</string>
-    <string name="search">Buscar</string>
+    <string name="search">Consultar Calorias dos Alimentos</string>
     <string name="back">Voltar</string>
     <string name="food_description_label">Descrição: %1$s</string>
     <string name="food_quantity">Quantidade: %1$s</string>
     <string name="food_calories">Calorias: %1$s</string>
+
+    <!-- BMI Screen -->
+
+    <string name="bmi_calculator">Calculadora de IMC</string>
+    <string name="enter_details">Insira seus dados</string>
+    <string name="weight_placeholder">Insira seu peso (kg)</string>
+    <string name="height_placeholder">Insira sua altura (cm)</string>
+    <string name="calculate_bmi">Calcular IMC</string>
+    <string name="bmi_result">Seu IMC: %.2f</string>
+    <string name="weighing_image_desc">Foto de uma balança corporal</string>
+
+    <!-- BMI Status -->
+    <string name="underweight">Abaixo do peso</string>
+    <string name="ideal_weight">Peso ideal</string>
+    <string name="slightly_overweight">Levemente acima do peso</string>
+    <string name="obesity_grade_1">Obesidade Grau I</string>
+    <string name="obesity_grade_2">Obesidade Grau II</string>
+    <string name="obesity_grade_3">Obesidade Grau III</string>
+
 
 
 </resources>
