@@ -52,6 +52,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(libs.navigation.compose)
+    implementation(libs.androidx.foundation.layout.android)
 
     // Debugging
     debugImplementation(libs.androidx.ui.tooling)
@@ -59,6 +60,9 @@ dependencies {
     // Dependencia do navigation
     implementation(libs.navigation.compose)
     implementation(libs.compose.material.icons.extended)
+
+    // MpAndroidChat
+    implementation ("com.github.PhilJay:MPAndroidChart:3.1.0")
 
     // Room
     implementation("androidx.room:room-runtime:$roomVersion")

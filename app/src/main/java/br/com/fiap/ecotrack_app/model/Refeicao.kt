@@ -8,5 +8,7 @@ data class Refeicao(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val tipo: String, // "Almoço" ou "Jantar"
     val comida: String,
-    val data: Long // Adicionando o campo de data
+    val data: Long, // Adicionando o campo de data
+    val calorias: Int // Adicionando o campo calorias
+
 )
