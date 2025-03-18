@@ -4,10 +4,10 @@
     <string name="password">Senha</string>
     <string name="enter">Entrar</string>
     <string name="login">Login</string>
+    <string name="register_button">Criar Conta</string>
     <string name="subtitle">Por favor, insira seus dados para fazer login</string>
     <string name="email_required_error">O e-mail é obrigatório</string>
     <string name="password_required_error">A senha é obrigatória</string>
-    <string name="skip_login">Pular login</string>
     <string name="password_visibility_toggle">Alternar visibilidade da senha</string>
     <string name="salad_image_desc">Bowl de Salada</string>
 

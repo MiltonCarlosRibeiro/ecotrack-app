@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.navigation.compose)
     implementation(libs.androidx.foundation.layout.android)
+    implementation(libs.firebase.firestore.ktx)
 
     // Debugging
     debugImplementation(libs.androidx.ui.tooling)

@@ -2,30 +2,13 @@ package br.com.fiap.ecotrack_app.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -38,22 +21,29 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import br.com.fiap.ecotrack_app.R
-
+import br.com.fiap.ecotrack_app.viewmodel.AuthViewModel
+import br.com.fiap.ecotrack_app.components.RegisterDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Unit) {
+fun LoginScreen(
+    navController: NavController,
+    viewModel: AuthViewModel = viewModel()
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var emailError by remember { mutableStateOf(false) }
     var passwordError by remember { mutableStateOf(false) }
     var passwordVisible by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
+    var showRegister by remember { mutableStateOf(false) }
+
     val maxPasswordLength = 8
     val generalPadding = 35.dp
     val cardPadding = 32.dp
@@ -72,8 +62,7 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
             fontWeight = FontWeight.ExtraBold,
             fontFamily = FontFamily(Font(R.font.roboto)),
             color = Color.White,
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center
         )
 
@@ -85,20 +74,16 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily(Font(R.font.roboto)),
             color = Color.White,
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center
         )
 
-        // SPACE FOR IMAGE (SALAD BOWL)
         Spacer(modifier = Modifier.height(30.dp))
 
         Image(
             painter = painterResource(id = R.drawable.salada),
             contentDescription = stringResource(id = R.string.salad_image_desc),
-            modifier = Modifier
-                .size(140.dp)
-                .align(Alignment.CenterHorizontally)
+            modifier = Modifier.size(140.dp).align(Alignment.CenterHorizontally)
         )
 
         Spacer(modifier = Modifier.height(28.dp))
@@ -108,133 +93,103 @@ fun LoginScreen(onLoginSuccess: (String, String) -> Unit, onSkipLogin: () -> Uni
             fontStyle = Italic,
             fontFamily = FontFamily(Font(R.font.roboto)),
             color = Color.Black,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 24.dp),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp),
             textAlign = TextAlign.Center
         )
 
         Spacer(modifier = Modifier.height(28.dp))
         Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 10.dp),
-            shape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp)
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp),
+            shape = MaterialTheme.shapes.medium
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(cardPadding)
-            ) {
+            Column(modifier = Modifier.fillMaxWidth().padding(cardPadding)) {
                 OutlinedTextField(
                     value = email,
                     onValueChange = { email = it },
                     modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        Text(
-                            text = stringResource(id = R.string.email),
-                            fontStyle = Italic,
-                            fontFamily = FontFamily(Font(R.font.roboto))
-                        )
-                    },
+                    label = { Text(stringResource(id = R.string.email)) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                     isError = emailError
                 )
-                if (emailError) {
-                    Text(
-                        text = stringResource(id = R.string.email_required_error),
-                        modifier = Modifier.fillMaxWidth(),
-                        fontSize = 14.sp,
-                        fontFamily = FontFamily(Font(R.font.roboto)),
-                        color = Color.Red,
-                        textAlign = TextAlign.End
-                    )
-                }
+
                 Spacer(modifier = Modifier.height(16.dp))
+
                 OutlinedTextField(
                     value = password,
-                    onValueChange = {
-                        if (it.length <= maxPasswordLength) {
-                            password = it
-                        }
-                    },
+                    onValueChange = { if (it.length <= maxPasswordLength) password = it },
                     modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        Text(
-                            text = stringResource(id = R.string.password),
-                            fontStyle = Italic,
-                            fontFamily = FontFamily(Font(R.font.roboto))
-                        )
-                    },
+                    label = { Text(stringResource(id = R.string.password)) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                     visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                     isError = passwordError,
                     trailingIcon = {
                         val image = if (passwordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
                         IconButton(onClick = { passwordVisible = !passwordVisible }) {
-                            Icon(
-                                imageVector = image,
-                                contentDescription = stringResource(id = R.string.password_visibility_toggle)
-                            )
+                            Icon(imageVector = image, contentDescription = stringResource(id = R.string.password_visibility_toggle))
                         }
                     }
                 )
-                if (passwordError) {
+
+                if (errorMessage != null) {
                     Text(
-                        text = stringResource(id = R.string.password_required_error),
-                        modifier = Modifier.fillMaxWidth(),
-                        fontSize = 14.sp,
-                        fontFamily = FontFamily(Font(R.font.roboto)),
+                        text = errorMessage!!,
                         color = Color.Red,
-                        textAlign = TextAlign.End
+                        fontSize = 14.sp,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(top = 8.dp)
                     )
                 }
+
                 Spacer(modifier = Modifier.height(32.dp))
+
                 Button(
                     onClick = {
                         emailError = email.isBlank()
                         passwordError = password.isBlank()
+
                         if (!emailError && !passwordError) {
-                            onLoginSuccess(email, password)
+                            viewModel.login(email, password) { success, message ->
+                                if (success) {
+                                    navController.navigate("IntroScreen") { // 🔥 Corrigido para a tela correta
+                                        popUpTo("LoginScreen") { inclusive = true }
+                                    }
+                                } else {
+                                    errorMessage = message
+                                }
+                            }
                         }
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    shape = androidx.compose.foundation.shape.RoundedCornerShape(50.dp),
+                    shape = MaterialTheme.shapes.medium,
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF5783AF))
                 ) {
                     Text(
                         text = stringResource(id = R.string.enter),
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .fillMaxWidth(),
+                        modifier = Modifier.padding(8.dp).fillMaxWidth(),
                         textAlign = TextAlign.Center
                     )
                 }
+
                 Spacer(modifier = Modifier.height(16.dp))
+
                 Button(
-                    onClick = {
-                        onSkipLogin()
-                    },
+                    onClick = { showRegister = true },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = stringResource(id = R.string.skip_login),
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .fillMaxWidth(),
+                        text = stringResource(id = R.string.register_button),
+                        modifier = Modifier.padding(8.dp).fillMaxWidth(),
                         textAlign = TextAlign.Center
                     )
                 }
             }
         }
     }
-}
 
-@Preview(showSystemUi = true)
-@Composable
-private fun LoginScreenPreview() {
-    LoginScreen(
-        onLoginSuccess = { _, _ -> },
-        onSkipLogin = {}
-    )
+    if (showRegister) {
+        RegisterDialog(
+            onDismiss = { showRegister = false },
+            viewModel = viewModel
+        )
+    }
 }

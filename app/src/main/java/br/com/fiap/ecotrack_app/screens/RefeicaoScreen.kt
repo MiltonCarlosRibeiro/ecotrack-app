@@ -56,7 +56,7 @@ fun RefeicaoScreen(navController: NavController) {
                     )
                 },
                 actions = {
-                    IconButton(onClick = { navController.navigate(MainActivity.Routes.INTRO_SCREEN_REV01) }) {
+                    IconButton(onClick = { navController.navigate(MainActivity.Routes.INTRO_SCREEN) }) {
                         Icon(
                             Icons.Filled.Home,
                             contentDescription = stringResource(id = R.string.home),
