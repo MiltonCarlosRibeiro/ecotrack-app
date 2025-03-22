@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Ecotrack</string>
+    <string name="email">E-mail</string>
+    <string name="password">Senha</string>
+    <string name="enter">Entrar</string>
+    <string name="login">Login</string>
+    <string name="register_button">Criar Conta</string>
+    <string name="subtitle">Por favor, insira seus dados para fazer login</string>
+    <string name="email_required_error">O e-mail é obrigatório</string>
+    <string name="password_required_error">A senha é obrigatória</string>
+    <string name="password_visibility_toggle">Alternar visibilidade da senha</string>
+    <string name="salad_image_desc">Bowl de Salada</string>
+
+
+    <!-- Intro -->
+    <string name="welcome_message">Seja bem-vindo ao nosso app!</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="physical_activity_tip">Você sabia que a combinação de atividade física regular com uma dieta equilibrada é a chave para uma perda de peso saudável e sustentável? Comece a se mexer e veja os resultados! 🏋️‍♀️</string>
+    <string name="did_you_know">Você sabia?</string>
+    <string name="hydration_tip">Beber água regularmente melhora a pele, a digestão e o humor? Mantenha-se hidratado(a) e sinta a diferença 💧</string>
+    <string name="sleep_tip">Dormir bem (7-9 horas por noite) fortalece o sistema imunológico, melhora a concentração e te deixa mais feliz? 😴 Priorize o seu descanso!</string>
+    <string name="healthy_diet_tip">Uma alimentação rica em frutas e vegetais fortalece o corpo e a mente? 🍎🥕 Invista em uma dieta equilibrada!</string>
+    <string name="take_care">Cuide-se!</string>
+    <string name="meal_control">Controle suas Refeições</string>
+    <string name="calorie_search">Pesquise Calorias</string>
+    <string name="my_meals">Minhas Refeições</string>
+    <string name="running_image_desc">Man running</string>
+
+
+    <!-- Refeições -->
+    <string name="meals">Refeições</string>
+    <string name="home">Início</string>
+    <string name="add_meal">Adicionar Refeição</string>
+    <string name="meal_type">Tipo: %1$s</string>
+    <string name="meal_food">Comida: %1$s</string>
+    <string name="meal_date">Data: %1$s</string>
+    <string name="meal_ranking">%1$dº: %2$s</string>
+    <string name="loading">Carregando...</string>
+    <string name="meal_type_label">Tipo</string>
+    <string name="meal_food_label">Comida</string>
+    <string name="select_date">Selecionar Data</string>
+    <string name="add">Adicionar</string>
+    <string name="cancel">Cancelar</string>
+
+    <!-- Consulta de Alimentos -->
+    <string name="food_query">Verificar Calorias</string>
+    <string name="food_description">Descrição do Alimento</string>
+    <string name="search">Consultar Calorias dos Alimentos</string>
+    <string name="back">Voltar</string>
+    <string name="food_description_label">Descrição: %1$s</string>
+    <string name="food_quantity">Quantidade: %1$s</string>
+    <string name="food_calories">Calorias: %1$s</string>
+
+    <!-- BMI Screen -->
+
+    <string name="bmi_calculator">Calculadora de IMC</string>
+    <string name="enter_details">Insira seus dados</string>
+    <string name="weight_placeholder">Insira seu peso (kg)</string>
+    <string name="height_placeholder">Insira sua altura (cm)</string>
+    <string name="calculate_bmi">Calcular IMC</string>
+    <string name="bmi_result">Seu IMC: %.2f</string>
+    <string name="weighing_image_desc">Foto de uma balança corporal</string>
+
+    <!-- BMI Status -->
+    <string name="underweight">Abaixo do peso</string>
+    <string name="ideal_weight">Peso ideal</string>
+    <string name="slightly_overweight">Levemente acima do peso</string>
+    <string name="obesity_grade_1">Obesidade Grau I</string>
+    <string name="obesity_grade_2">Obesidade Grau II</string>
+    <string name="obesity_grade_3">Obesidade Grau III</string>
+
+
+
+</resources>

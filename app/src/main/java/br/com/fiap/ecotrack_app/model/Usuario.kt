@@ -1,7 +1,10 @@
-package br.com.fiap.ecotrack_app.model
+package br.com.fiap.ecotrack_app.model.entity
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "users")
 data class Usuario(
-    val nome: String,
-    val email: String,
+    @PrimaryKey(autoGenerate = false) val email: String, // O email é a chave primária
     val password: String
 )

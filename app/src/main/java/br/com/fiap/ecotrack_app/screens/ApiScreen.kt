@@ -1,17 +1,24 @@
 package br.com.fiap.ecotrack_app.screens
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -22,6 +29,7 @@ import androidx.navigation.NavController
 import br.com.fiap.ecotrack_app.R
 import br.com.fiap.ecotrack_app.model.alimento.Alimento
 import br.com.fiap.ecotrack_app.service.RetrofitFactory
+import kotlinx.coroutines.delay
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,87 +39,138 @@ import retrofit2.Response
 fun ApiScreen(navController: NavController) {
     var descricaoState by remember { mutableStateOf("") }
     var listaAlimentosState by remember { mutableStateOf(listOf<Alimento>()) }
+    var isLoading by remember { mutableStateOf(false) }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background) // Utiliza a cor de fundo do tema
-            .padding(16.dp)
-    ) {
-        Spacer(modifier = Modifier.height(16.dp))
-        Column {
-            Text(
-                text = "Consulta de Alimentos",
-                fontSize = 70.sp,
-                fontWeight = FontWeight.Light,
-                color = MaterialTheme.colorScheme.onBackground, // Utiliza a cor do texto do tema
-                modifier = Modifier.align(Alignment.CenterHorizontally),
-                fontFamily = FontFamily(Font(R.font.stickcream))
-            )
+    val robotoFont = FontFamily(Font(R.font.roboto))
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            OutlinedTextField(
-                value = descricaoState,
-                onValueChange = { descricaoState = it },
-                label = { Text("Descrição do Alimento") },
-                modifier = Modifier.fillMaxWidth(),
-                trailingIcon = {
-                    IconButton(onClick = {
-                        val call = RetrofitFactory().getAlimentoService().getAlimentos(descricaoState)
-                        call.enqueue(object : Callback<List<Alimento>> {
-                            override fun onResponse(call: Call<List<Alimento>>, response: Response<List<Alimento>>) {
-                                listaAlimentosState = response.body() ?: emptyList()
-                            }
-
-                            override fun onFailure(call: Call<List<Alimento>>, t: Throwable) {
-                                // Tratar erro
-                            }
-                        })
-                    }) {
-                        Icon(imageVector = Icons.Default.Search, contentDescription = "Buscar")
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = stringResource(id = R.string.food_query),
+                        fontFamily = robotoFont,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Voltar", tint = Color.White)
                     }
                 },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF5783AF))
             )
+        }
+    ) { paddingValues ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    Brush.verticalGradient(
+                        listOf(Color(0xFF5783AF), Color(0xFFB3E5FC))
+                    )
+                )
+                .padding(paddingValues)
+                .padding(16.dp)
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                OutlinedTextField(
+                    value = descricaoState,
+                    onValueChange = { descricaoState = it },
+                    label = {
+                        Text(
+                            text = stringResource(id = R.string.food_description),
+                            fontFamily = robotoFont
+                        )
+                    },
+                    shape = RoundedCornerShape(20.dp),
+                    modifier = Modifier.fillMaxWidth(),
+                    trailingIcon = {
+                        IconButton(
+                            onClick = {
+                                isLoading = true
+                                val call = RetrofitFactory().getAlimentoService().getAlimentos(descricaoState)
+                                call.enqueue(object : Callback<List<Alimento>> {
+                                    override fun onResponse(call: Call<List<Alimento>>, response: Response<List<Alimento>>) {
+                                        listaAlimentosState = response.body() ?: emptyList()
+                                        isLoading = false
+                                    }
 
-            Spacer(modifier = Modifier.height(16.dp))
+                                    override fun onFailure(call: Call<List<Alimento>>, t: Throwable) {
+                                        isLoading = false
+                                    }
+                                })
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                contentDescription = stringResource(id = R.string.search),
+                                tint = Color(0xFF5783AF)
+                            )
+                        }
+                    },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+                )
 
-            LazyColumn {
-                items(listaAlimentosState) { alimento ->
-                    CardAlimento(alimento = alimento)
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Exibe indicador de carregamento
+                AnimatedVisibility(visible = isLoading) {
+                    CircularProgressIndicator(
+                        color = Color(0xFF5783AF),
+                        modifier = Modifier.padding(16.dp)
+                    )
                 }
-            }
 
-            Spacer(modifier = Modifier.height(16.dp))
+                LazyColumn {
+                    items(listaAlimentosState) { alimento ->
+                        CardAlimento(alimento = alimento)
+                    }
+                }
 
-            Button(
-                onClick = {
-                    navController.navigate(route = "IntroScreen_rev01")
-                },
-                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary), // Utiliza a cor primária do tema
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            ) {
-                Text(text = "BACK", fontSize = 20.sp, color = MaterialTheme.colorScheme.onPrimary) // Utiliza a cor do texto no botão do tema
+                Spacer(modifier = Modifier.height(16.dp))
+
+
+
+                }
             }
         }
     }
-}
+
 
 @Composable
 fun CardAlimento(alimento: Alimento) {
+    val robotoFont = FontFamily(Font(R.font.roboto))
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp), // Adiciona padding ao card
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp) // Adiciona elevação ao card
+            .padding(8.dp)
+            .shadow(8.dp, RoundedCornerShape(16.dp)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = "Descrição: ${alimento.descricao}", fontWeight = FontWeight.SemiBold)
+            Text(
+                text = stringResource(id = R.string.food_description_label, alimento.descricao),
+                fontWeight = FontWeight.Bold,
+                fontFamily = robotoFont,
+                color = Color(0xFF5783AF),
+                fontSize = 18.sp
+            )
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = "Quantidade: ${alimento.quantidade}")
+            Text(
+                text = stringResource(id=R.string.food_quantity, alimento.quantidade),
+                fontFamily = robotoFont,
+                color = Color.DarkGray
+            )
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = "Calorias: ${alimento.calorias}")
+            Text(
+                text = stringResource(id = R.string.food_calories, alimento.calorias),
+                fontFamily = robotoFont,
+                color = Color.DarkGray
+            )
         }
     }
 }

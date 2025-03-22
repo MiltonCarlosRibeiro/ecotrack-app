@@ -1,219 +1,285 @@
 package br.com.fiap.ecotrack_app.screens
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import br.com.fiap.ecotrack_app.components.CaloriasChart
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.DatePicker
-import androidx.compose.material3.DatePickerDialog
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.rememberDatePickerState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import br.com.fiap.ecotrack_app.MainActivity
+import br.com.fiap.ecotrack_app.R
 import br.com.fiap.ecotrack_app.viewmodel.RefeicaoViewModel
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import java.util.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RefeicaoScreen(navController: NavController) {
     val viewModel: RefeicaoViewModel = viewModel()
     val databaseInitialized by viewModel.databaseInitialized.collectAsState()
+    val totalCalorias by viewModel.totalCalorias.collectAsState(initial = 0)
     var showDialog by remember { mutableStateOf(false) }
+    var filtro by remember { mutableStateOf("Diário") }
+
+    // Seleciona o fluxo de calorias com base no filtro escolhido
+    val caloriasFlow = when (filtro) {
+        "Semanal" -> viewModel.getCaloriasPorSemana()
+        "Mensal" -> viewModel.getCaloriasPorMes()
+        else -> viewModel.getCaloriasPorDia()
+    }
+
+    val robotoFont = FontFamily(Font(R.font.roboto))
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Refeições") },
+                title = {
+                    Text(
+                        stringResource(id = R.string.meals),
+                        fontFamily = robotoFont,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                },
                 actions = {
-                    IconButton(onClick = { navController.navigate(MainActivity.Routes.INTRO_SCREEN_REV01) }) {
+                    IconButton(onClick = { navController.navigate(MainActivity.Routes.INTRO_SCREEN) }) {
                         Icon(
                             Icons.Filled.Home,
-                            contentDescription = "Início",
-                            modifier = Modifier.size(50.dp)
+                            contentDescription = stringResource(id = R.string.home),
+                            modifier = Modifier.size(40.dp),
+                            tint = Color.White
                         )
                     }
-                }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(0xFF5783AF)
+                )
             )
         },
         floatingActionButton = {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Bottom
+            FloatingActionButton(
+                onClick = { showDialog = true },
+                containerColor = Color(0xFF5783AF),
+                contentColor = Color.White
             ) {
-                FloatingActionButton(
-                    onClick = { showDialog = true },
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    contentColor = MaterialTheme.colorScheme.onPrimary
-                ) {
-                    Icon(imageVector = Icons.Default.Add, contentDescription = "Adicionar Refeição")
-                }
+                Icon(imageVector = Icons.Default.Add, contentDescription = stringResource(id = R.string.add_meal))
             }
         },
-        floatingActionButtonPosition = androidx.compose.material3.FabPosition.Center
+        floatingActionButtonPosition = FabPosition.Center
     ) { paddingValues ->
         Column(
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(16.dp)
-                .verticalScroll(rememberScrollState()) // Scroll adicionado aqui
+                .verticalScroll(rememberScrollState())
+                .background(Color(0xFFE3F2FD))
         ) {
             if (databaseInitialized) {
                 val refeicoes by viewModel.allRefeicoes.collectAsState(initial = emptyList())
-                val rankingComidas by viewModel.rankingComidas.collectAsState(initial = emptyList())
 
-                // Lista de Refeições
-                refeicoes.forEach { refeicao ->
-                    Card(modifier = Modifier.padding(8.dp).fillMaxWidth()) {
-                        Column {
-                            Card(modifier = Modifier.padding(8.dp).fillMaxWidth()) {
-                                Text(
-                                    text = "Tipo: ${refeicao.tipo}",
-                                    modifier = Modifier.padding(16.dp),
-                                    fontWeight = FontWeight.SemiBold
-                                )
-                            }
-                            Card(modifier = Modifier.padding(8.dp).fillMaxWidth()) {
-                                Text(
-                                    text = "Comida: ${refeicao.comida}",
-                                    modifier = Modifier.padding(16.dp),
-                                    fontWeight = FontWeight.SemiBold
-                                )
-                            }
-                            Card(modifier = Modifier.padding(8.dp).fillMaxWidth()) {
-                                val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                                val dataFormatada = sdf.format(Date(refeicao.data))
-                                Text(
-                                    text = "Data: $dataFormatada",
-                                    modifier = Modifier.padding(16.dp),
-                                    fontWeight = FontWeight.SemiBold
-                                )
-                            }
+                // 📌 Exibir total de calorias consumidas
+                Text(
+                    text = "Total de calorias consumidas: $totalCalorias kcal",
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = robotoFont,
+                    color = Color.Red,
+                    modifier = Modifier.padding(16.dp)
+                )
+
+                // 📌 Botões para alternar entre períodos (Diário, Semanal, Mensal)
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxWidth().padding(8.dp)
+                ) {
+                    listOf("Diário", "Semanal", "Mensal").forEach { periodo ->
+                        Button(
+                            onClick = { filtro = periodo },
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = if (filtro == periodo) Color(0xFF5783AF) else Color.Gray,
+                                contentColor = Color.White
+                            ),
+                            modifier = Modifier.padding(horizontal = 4.dp)
+                        ) {
+                            Text(periodo)
                         }
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                // 📌 Exibir gráfico de consumo calórico
+                Text(
+                    text = "Gráfico de Consumo de Calorias",
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(top = 16.dp)
+                )
+                CaloriasChart(caloriasFlow = caloriasFlow)
 
-                // Ranking de Comidas
-                rankingComidas.forEachIndexed { index, ranking ->
-                    Card(modifier = Modifier.padding(8.dp).fillMaxWidth()) {
-                        Text(
-                            text = "${index + 1}º: ${ranking.comida}",
-                            modifier = Modifier.padding(16.dp),
-                            fontWeight = FontWeight.SemiBold
+                // 📌 Lista de refeições
+                refeicoes.forEachIndexed { index, refeicao ->
+                    Card(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth(),
+                        shape = MaterialTheme.shapes.medium,
+                        colors = CardDefaults.cardColors(containerColor = Color.White)
+                    ) {
+                        Column(modifier = Modifier.padding(16.dp)) {
+                            Text(text = "Tipo: ${refeicao.tipo}", fontWeight = FontWeight.Bold)
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(text = "Comida: ${refeicao.comida}", fontWeight = FontWeight.Normal)
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(text = "Calorias: ${refeicao.calorias} kcal", fontWeight = FontWeight.Medium)
+                            Spacer(modifier = Modifier.height(8.dp))
+
+                            // 📌 Exibição da data formatada corretamente
+                            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                            val dataFormatada = sdf.format(Date(refeicao.data))
+                            Text(text = "Data: $dataFormatada", fontWeight = FontWeight.Light)
+                        }
+                    }
+
+                    // 📌 Adicionar um divisor entre os itens
+                    if (index < refeicoes.size - 1) {
+                        Divider(
+                            color = Color.Gray,
+                            thickness = 1.dp,
+                            modifier = Modifier.padding(horizontal = 16.dp)
                         )
                     }
                 }
-            } else {
-                Text("Carregando...", modifier = Modifier.padding(16.dp))
             }
         }
 
         if (showDialog) {
             AddRefeicaoDialog(
                 onDismiss = { showDialog = false },
-                onConfirm = { tipo, comida, data ->
-                    viewModel.insertRefeicao(tipo, comida, data)
+                onConfirm = { tipo, comida, data, calorias ->
+                    viewModel.insertRefeicao(tipo, comida, data, calorias)
                     showDialog = false
                 }
             )
         }
     }
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddRefeicaoDialog(onDismiss: () -> Unit, onConfirm: (String, String, Long) -> Unit) {
+fun AddRefeicaoDialog(onDismiss: () -> Unit, onConfirm: (String, String, Long, Int) -> Unit) {
     var tipo by remember { mutableStateOf("Almoço") }
     var comida by remember { mutableStateOf("") }
+    var calorias by remember { mutableStateOf("") }
     var showDatePicker by remember { mutableStateOf(false) }
     var selectedDate by remember { mutableStateOf(System.currentTimeMillis()) }
+    var expanded by remember { mutableStateOf(false) } // 🔹 Estado para abrir/fechar o dropdown
 
+    val mealTypes = listOf("Café da Manhã", "Almoço", "Jantar", "Lanche")
+
+    // 📌 Criando estado do DatePicker
     val datePickerState = rememberDatePickerState(initialSelectedDateMillis = selectedDate)
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Adicionar Refeição") },
+        title = { Text(stringResource(id = R.string.add_meal)) },
         text = {
             Column {
-                TextField(
-                    value = tipo,
-                    onValueChange = { tipo = it },
-                    label = { Text("Tipo") },
-                    modifier = Modifier.fillMaxWidth()
-                )
+                // 📌 MENU DROPDOWN FUNCIONANDO 100%
+                Box {
+                    TextField(
+                        value = tipo,
+                        onValueChange = {},
+                        readOnly = true,
+                        label = { Text("Tipo de Refeição") },
+                        trailingIcon = {
+                            IconButton(onClick = { expanded = !expanded }) {
+                                Icon(Icons.Default.Add, contentDescription = "Expandir")
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    DropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false }
+                    ) {
+                        mealTypes.forEach { selection ->
+                            DropdownMenuItem(
+                                text = { Text(selection) },
+                                onClick = {
+                                    tipo = selection
+                                    expanded = false
+                                }
+                            )
+                        }
+                    }
+                }
+
                 Spacer(modifier = Modifier.height(8.dp))
+
+                // 📌 Campo de entrada para comida
                 TextField(
                     value = comida,
                     onValueChange = { comida = it },
                     label = { Text("Comida") },
                     modifier = Modifier.fillMaxWidth()
                 )
+
                 Spacer(modifier = Modifier.height(8.dp))
-                Button(onClick = { showDatePicker = true }) {
+
+                // 📌 Campo de entrada para calorias
+                TextField(
+                    value = calorias,
+                    onValueChange = { calorias = it.filter { char -> char.isDigit() } },
+                    label = { Text("Calorias (kcal)") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // 📌 Botão para abrir o DatePicker
+                Button(
+                    onClick = { showDatePicker = true },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
                     Text("Selecionar Data")
                 }
+
+                // 📌 Exibir a data selecionada corretamente
+                val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val dataFormatada = sdf.format(Date(selectedDate))
+                Text(
+                    text = "Data selecionada: $dataFormatada",
+                    fontWeight = FontWeight.Medium,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
             }
         },
         confirmButton = {
-            Button(
-                onClick = {
-                    onConfirm(tipo, comida, selectedDate)
-                },
-                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
-            ) {
+            Button(onClick = {
+                val caloriasInt = calorias.toIntOrNull() ?: 0
+                onConfirm(tipo, comida, selectedDate, caloriasInt)
+            }) {
                 Text("Adicionar")
             }
         },
         dismissButton = {
-            Button(
-                onClick = onDismiss,
-                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.secondary)
-            ) {
+            Button(onClick = onDismiss) {
                 Text("Cancelar")
             }
-        },
-        containerColor = MaterialTheme.colorScheme.surfaceVariant,
-        titleContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-        textContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-        shape = MaterialTheme.shapes.medium
+        }
     )
 
+    // 📌 DatePicker funcionando corretamente
     if (showDatePicker) {
         DatePickerDialog(
             onDismissRequest = { showDatePicker = false },
