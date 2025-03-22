@@ -1,6 +1,6 @@
-# EcoTrack App
+# NutriLog App
 
-EcoTrack is a Kotlin-based Android application developed by **Milton Ribeiro**, **Victor**, and **Hugo Farranha** as a college course project. The app utilizes **Room SQL** for local data storage and features a user authentication system, an API integration, a meal tracking interface, and a BMI calculator.
+NutriLog is a Kotlin-based Android application developed by **Milton Ribeiro**, **Victor**, and **Hugo Farranha** as a college course project. The app utilizes **Room SQL** for local data storage and features a user authentication system, an API integration, a meal tracking interface, and a BMI calculator.
 
 ## 📌 Features
 - **User Authentication**: Login system with validation and persistent session management.
